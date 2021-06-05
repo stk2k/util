@@ -8,6 +8,8 @@ use Throwable;
 
 use PHPUnit\Framework\TestCase;
 
+use stk2k\Util\Util;
+
 class MyClass
 {
     public function methodA(){}
@@ -65,9 +67,9 @@ class UtilTest extends TestCase
 
 OUTPUT_EXPECTED;
         $expected = str_replace("\n", PHP_EOL, $expected);
-        $expected = str_replace('%LINE1%', $line1, $expected);
-        $expected = str_replace('%LINE2%', $line2, $expected);
-        $expected = str_replace('%LINE3%', $line3, $expected);
+        $expected = str_replace('%LINE1%', (string)$line1, $expected);
+        $expected = str_replace('%LINE2%', (string)$line2, $expected);
+        $expected = str_replace('%LINE3%', (string)$line3, $expected);
         $expected = str_replace('%FILENAME%', __FILE__, $expected);
 
         $this->assertEquals($expected, $output);
@@ -86,9 +88,9 @@ OUTPUT_EXPECTED;
 
 OUTPUT_EXPECTED;
         $expected = str_replace("\n", PHP_EOL, $expected);
-        $expected = str_replace('%LINE1%', $line1, $expected);
-        $expected = str_replace('%LINE2%', $line2, $expected);
-        $expected = str_replace('%LINE3%', $line3, $expected);
+        $expected = str_replace('%LINE1%', (string)$line1, $expected);
+        $expected = str_replace('%LINE2%', (string)$line2, $expected);
+        $expected = str_replace('%LINE3%', (string)$line3, $expected);
         $expected = str_replace('%FILENAME%', __FILE__, $expected);
 
         $this->assertEquals($expected, $output);
@@ -107,9 +109,9 @@ OUTPUT_EXPECTED;
 
 OUTPUT_EXPECTED;
         $expected = str_replace("\n", PHP_EOL, $expected);
-        $expected = str_replace('%LINE1%', $line1, $expected);
-        $expected = str_replace('%LINE2%', $line2, $expected);
-        $expected = str_replace('%LINE3%', $line3, $expected);
+        $expected = str_replace('%LINE1%', (string)$line1, $expected);
+        $expected = str_replace('%LINE2%', (string)$line2, $expected);
+        $expected = str_replace('%LINE3%', (string)$line3, $expected);
         $expected = str_replace('%FILENAME%', __FILE__, $expected);
 
         $this->assertEquals($expected, $output);
