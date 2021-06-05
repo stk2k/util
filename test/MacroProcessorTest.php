@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace stk2k\Util\Test;
+namespace stk2k\util\test;
 
 
 use PHPUnit\Framework\TestCase;
-use stk2k\Util\MacroProcessor;
+use stk2k\util\MacroProcessor;
 
 class MacroProcessorTest extends TestCase
 {

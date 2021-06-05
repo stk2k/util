@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace stk2k\Util\Exception;
+namespace stk2k\util\exception;
 
 use Throwable;
 use Exception;

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace stk2k\Util\Handler;
+namespace stk2k\util\handler;
 
-use stk2k\Util\MacroHandlerInterface;
+use stk2k\util\MacroHandlerInterface;
 
-class SessionMacroHandler implements MacroHandlerInterface
+class GetMacroHandler implements MacroHandlerInterface
 {
     /**
      * Process macro
@@ -15,6 +15,6 @@ class SessionMacroHandler implements MacroHandlerInterface
      * @return string|NULL
      */
     public function process(string $keyword){
-        return $_SESSION[$keyword] ?? false;
+        return $_GET[$keyword] ?? false;
     }
 }

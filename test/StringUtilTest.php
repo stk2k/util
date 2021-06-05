@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace stk2k\Util\Test;
+namespace stk2k\util\test;
 
 use PHPUnit\Framework\TestCase;
-use stk2k\Util\StringUtil;
+use stk2k\util\StringUtil;
 
 class StringUtilTest extends TestCase
 {

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace stk2k\Util;
+namespace stk2k\util;
 
 use InvalidArgumentException;
 
-use stk2k\Util\Enum\EnumMemoryUnit as EnumMemoryUnit;
+use stk2k\util\enum\EnumMemoryUnit as EnumMemoryUnit;
 
 /**
 * Utility class of memory calculations

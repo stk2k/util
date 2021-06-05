@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace stk2k\Util\Handler;
+namespace stk2k\util\handler;
 
-use stk2k\Util\MacroHandlerInterface;
+use stk2k\util\MacroHandlerInterface;
 
 final class CombinedMacroHandler implements MacroHandlerInterface
 {

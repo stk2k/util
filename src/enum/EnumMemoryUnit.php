@@ -1,5 +1,7 @@
 <?php
-namespace Stk2k\Util\Enum;
+declare(strict_types=1);
+
+namespace stk2k\util\enum;
 
 class EnumMemoryUnit
 {
