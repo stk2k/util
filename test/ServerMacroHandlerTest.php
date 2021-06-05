@@ -6,10 +6,6 @@ use Stk2k\Util\Enum\EnumMacroHandler;
 
 class ServerMacroHandlerTest extends TestCase
 {
-    protected function setUp()
-    {
-    }
-
     /**
      * @throws
      */

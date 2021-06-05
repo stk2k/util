@@ -21,7 +21,7 @@ PHP7 utility classes
 
 ## Requirement
 
-PHP 7.1 or later
+PHP 7.2 or later
 
 ## Installing stk2k/util
 

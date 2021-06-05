@@ -5,10 +5,6 @@ use Stk2k\Util\MacroProcessor;
 
 class MacroProcessorTest extends TestCase
 {
-    protected function setUp()
-    {
-    }
-
     /**
      * @throws
      */
