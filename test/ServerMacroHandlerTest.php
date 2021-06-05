@@ -1,8 +1,12 @@
 <?php
+declare(strict_types=1);
+
+namespace stk2k\Util\Test;
+
 
 use PHPUnit\Framework\TestCase;
-use Stk2k\Util\MacroProcessor;
-use Stk2k\Util\Enum\EnumMacroHandler;
+use stk2k\Util\MacroProcessor;
+use stk2k\Util\Enum\EnumMacroHandler;
 
 class ServerMacroHandlerTest extends TestCase
 {

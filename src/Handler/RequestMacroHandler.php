@@ -1,7 +1,9 @@
 <?php
-namespace Stk2k\Util\Handler;
+declare(strict_types=1);
 
-use Stk2k\Util\MacroHandlerInterface;
+namespace stk2k\Util\Handler;
+
+use stk2k\Util\MacroHandlerInterface;
 
 class RequestMacroHandler implements MacroHandlerInterface
 {

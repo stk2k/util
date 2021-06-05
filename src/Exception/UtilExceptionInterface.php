@@ -1,7 +1,7 @@
 <?php
-namespace Stk2k\Util\Exception;
+declare(strict_types=1);
 
-use Calgamo\Exception\CalgamoExceptionInterface;
+namespace stk2k\Util\Exception;
 
 interface UtilExceptionInterface
 {

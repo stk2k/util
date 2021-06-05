@@ -1,17 +1,19 @@
 <?php
-namespace Stk2k\Util;
+declare(strict_types=1);
 
-use Stk2k\Util\Exception\MacroHandlerException;
-use Stk2k\Util\Handler\SystemMacroHandler;
-use Stk2k\Util\Handler\DateMacroHandler;
-use Stk2k\Util\Handler\ServerMacroHandler;
-use Stk2k\Util\Handler\EnvMacroHandler;
-use Stk2k\Util\Handler\CookieMacroHandler;
-use Stk2k\Util\Handler\SessionMacroHandler;
-use Stk2k\Util\Handler\GetMacroHandler;
-use Stk2k\Util\Handler\PostMacroHandler;
-use Stk2k\Util\Handler\RequestMacroHandler;
-use Stk2k\Util\Enum\EnumMacroHandler;
+namespace stk2k\Util;
+
+use stk2k\Util\Exception\MacroHandlerException;
+use stk2k\Util\Handler\SystemMacroHandler;
+use stk2k\Util\Handler\DateMacroHandler;
+use stk2k\Util\Handler\ServerMacroHandler;
+use stk2k\Util\Handler\EnvMacroHandler;
+use stk2k\Util\Handler\CookieMacroHandler;
+use stk2k\Util\Handler\SessionMacroHandler;
+use stk2k\Util\Handler\GetMacroHandler;
+use stk2k\Util\Handler\PostMacroHandler;
+use stk2k\Util\Handler\RequestMacroHandler;
+use stk2k\Util\Enum\EnumMacroHandler;
 
 class MacroProcessor
 {

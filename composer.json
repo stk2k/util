@@ -20,7 +20,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Stk2k\\Util\\": "src/"
+      "stk2k\\Util\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "stk2k\\Util\\Test\\": "test/"
     }
   }
 }
