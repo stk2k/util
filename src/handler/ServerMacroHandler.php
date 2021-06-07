@@ -14,7 +14,8 @@ class ServerMacroHandler implements MacroHandlerInterface
      *
      * @return string|NULL
      */
-    public function process(string $keyword){
+    public function process(string $keyword) : string
+    {
         switch($keyword){
             case 'SERVER_NAME':
             case 'REQUEST_METHOD':
@@ -47,8 +48,8 @@ class ServerMacroHandler implements MacroHandlerInterface
             case 'AUTH_TYPE':
             case 'PATH_INFO':
             case 'ORIG_PATH_INFO':
-                return $_SERVER[$keyword] ?? false;
+                return $_SERVER[$keyword] ?? $keyword;
         }
-        return false;
+        return $keyword;
     }
 }

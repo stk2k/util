@@ -14,7 +14,8 @@ class EnvMacroHandler implements MacroHandlerInterface
      *
      * @return string|NULL
      */
-    public function process(string $keyword){
-        return $_ENV[$keyword] ?? false;
+    public function process(string $keyword) : string
+    {
+        return $_ENV[$keyword] ?? $keyword;
     }
 }

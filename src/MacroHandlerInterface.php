@@ -10,7 +10,7 @@ interface MacroHandlerInterface
      *
      * @param string $keyword
      *
-     * @return string|NULL
+     * @return string
      */
-    public function process(string $keyword);
+    public function process(string $keyword): string;
 }

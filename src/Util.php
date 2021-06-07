@@ -32,19 +32,19 @@ final class Util
      *
      * @param string $message
      */
-    public static function printError($message)
+    public static function printError(string $message)
     {
         if (defined('STDERR')){
             fputs(STDERR, $message . "\n");
         }
         error_log($message);
     }
-    
+
     /**
      * Dump exceptions
      *
      * @param Throwable $e
-     * @param callable $line_renderer
+     * @param callable|null $line_renderer
      * @param string $format
      */
     public static function dumpException(Throwable $e, callable $line_renderer = null, string $format = self::DUMP_EXCEPTION_DEFAULT_FORMAT)
@@ -81,12 +81,12 @@ final class Util
             $e = $e->getPrevious();
         }
     }
-    
+
     /**
      * Dump back traces
      *
      * @param array $backtraces
-     * @param callable $line_renderer
+     * @param callable|null $line_renderer
      * @param string $format
      */
     public static function dumpBacktrace(array $backtraces, callable $line_renderer = null, string $format = self::DUMP_BACKTRACE_DEFAULT_FORMAT)
@@ -134,7 +134,7 @@ final class Util
      */
     public static function phpTypes() : array
     {
-        static $_ = [
+        return [
             'boolean',
             'integer',
             'double',
@@ -145,7 +145,6 @@ final class Util
             'NULL',
             'unknown type',
         ];
-        return $_;
     }
 
     /**
@@ -155,7 +154,7 @@ final class Util
     public static function getUserDefinedConstants()
     {
         $all = get_defined_constants(TRUE);
-        return isset($all['user']) ? $all['user'] : array();
+        return $all['user'] ?? array();
     }
 
     /**
@@ -172,11 +171,9 @@ final class Util
         switch($mode){
         case self::BITTEST_MODE_ALL:
             return ($target & $flag) === $flag;
-            break;
         case self::BITTEST_MODE_ANY:
             return ($target & $flag) != 0;
         }
-
         return false;
     }
 
@@ -226,7 +223,7 @@ final class Util
      *
      * @return array
      */
-    public static function swap( $a, $b )
+    public static function swap( $a, $b ): array
     {
         return array( $b, $a );
     }
@@ -236,11 +233,11 @@ final class Util
      *
      * @param int $size
      * @param int $precision
-     * @param array $symbols
+     * @param array|null $symbols
      *
      * @return string
      */
-    public static function formatByteSize( $size, $precision = 1, $symbols = NULL )
+    public static function formatByteSize(int $size, int $precision = 1, array $symbols = null ): string
     {
         if ( $symbols === NULL ){
             $symbols = array('B', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb');
@@ -257,14 +254,14 @@ final class Util
      *  generate hash value
      *
      * @param string $algo
-     * @param string $data
+     * @param string|null $data
      *
      * @return string
      */
-    public static function hash( string $algo = 'sha1', string $data = NULL )
+    public static function hash(string $algo = 'sha1', string $data = null ): string
     {
         if (!$data){
-            $data = microtime().uniqid(mt_rand(),1);
+            $data = microtime().uniqid((string)mt_rand(), true);
         }
         return hash( $algo, $data );
     }
@@ -279,9 +276,7 @@ final class Util
     public static function escape( $value )
     {
         if ( is_string($value) ){
-            $res = htmlspecialchars($value, ENT_QUOTES, mb_internal_encoding());
-//log_debug( "debug", "escape:" . print_r($res,true) );
-            return $res;
+            return htmlspecialchars($value, ENT_QUOTES, mb_internal_encoding());
         }
         elseif ( is_array($value) ){
             $ret = array();
@@ -311,10 +306,7 @@ final class Util
     public static function decode( $value )
     {
         if ( is_string($value) ){
-//log_debug( "debug", "decode before:" . print_r($value,true) );
-            $res = htmlspecialchars_decode($value, ENT_QUOTES);
-//log_debug( "debug", "decode after:" . print_r($res,true) );
-            return $res;
+            return htmlspecialchars_decode($value, ENT_QUOTES);
         }
         elseif ( is_array($value) ){
             return array_map('Charcoal_System::decode', $value);
@@ -334,15 +326,14 @@ final class Util
      *  remove HTML tags
      *
      * @param mixed $value
-     * @param string $allowable_tags
+     * @param string|null $allowable_tags
      *
      * @return mixed
      */
-    public static function stripTags( $value, $allowable_tags = NULL )
+    public static function stripTags($value, string $allowable_tags = null)
     {
         if ( is_string($value) ){
-            $res = strip_tags($value, $allowable_tags);
-            return $res;
+            return strip_tags($value, $allowable_tags);
         }
         elseif ( is_array($value) ){
             $array = $value;
@@ -396,11 +387,11 @@ final class Util
      *   escape string for HTML
      *
      * @param string $string_data
-     * @param array $options
+     * @param array|null $options
      *
-     * @return mixed
+     * @return string
      */
-    public static function escapeString( $string_data, $options = NULL )
+    public static function escapeString(string $string_data, array $options = null): string
     {
         if ( !$options ){
             $options = array(
@@ -413,9 +404,7 @@ final class Util
             $quote_style = ENT_QUOTES;
         }
 
-        $str = htmlspecialchars( $string_data, $quote_style );
-
-        return $str;
+        return htmlspecialchars( $string_data, $quote_style );
     }
 
     /**
@@ -426,7 +415,7 @@ final class Util
      *
      * @return string
      */
-    public static function makeRandomString( $length, $char_set = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_' )
+    public static function makeRandomString(int $length, string $char_set = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_' ): string
     {
         $ret = '';
         $char_set_cnt = strlen($char_set);
@@ -447,7 +436,7 @@ final class Util
      *
      * @return array
      */
-    public static function caller(int $back = 0)
+    public static function caller(int $back = 0): array
     {
         $bt = debug_backtrace();
         $trace = $bt[$back] ?? null;
@@ -466,7 +455,7 @@ final class Util
      *
      * @return string
      */
-    public static function callerAsString( $back = 0, $fullpath = FALSE )
+    public static function callerAsString(int $back = 0, bool $fullpath = false ): string
     {
         list( $file, $line ) = self::caller( $back );
 
@@ -486,25 +475,21 @@ final class Util
      *
      * @return string
      */
-    public static function getType( $value )
+    public static function getType($value): string
     {
         $type = gettype($value);
         switch( $type ){
         case 'string':
             return $type . '(' . strlen($value) . ')';
-            break;
         case 'integer':
         case 'float':
         case 'boolean':
             return $type . '(' . $value . ')';
-            break;
         case 'NULL':
         case 'unknown type':
             return $type;
-            break;
         case 'array':
             return $type . '(' . count($value) . ')';
-            break;
         case 'object':
             if ( $value instanceof Countable ){
                 return get_class( $value ) . '(' . count($value) . ')';
@@ -513,7 +498,6 @@ final class Util
                 return get_class( $value ) . '(hash=' . $value->hash() . ')';
             }
             return get_class( $value );
-            break;
         }
         return '';
     }
@@ -528,7 +512,7 @@ final class Util
      *
      * @return string
      */
-    public static function toString( $value, $with_type = FALSE, $max_size = self::TOSTRING_MAX_LENGTH, $tostring_methods = '__toString,toString' )
+    public static function toString($value, bool $with_type = false, int $max_size = self::TOSTRING_MAX_LENGTH, string $tostring_methods = '__toString,toString' ): string
     {
         $ret = '';
 
@@ -590,13 +574,13 @@ final class Util
      * @param mixed $var
      * @param string $format
      * @param int $back
-     * @param array $options
+     * @param array|null $options
      * @param bool $return
      * @param int $max_depth
      *
      * @return string
      */
-    public static function dump( $var, $format = 'html', $back = 0, $options = NULL, $return = FALSE, $max_depth = 6 )
+    public static function dump($var, string $format = 'html', int $back = 0, array $options = null, bool $return = false, int $max_depth = 6 ): ?string
     {
         list( $file, $line ) = self::caller( $back );
 
@@ -729,12 +713,12 @@ final class Util
      *  convert encoding
      *
      * @param string $str
-     * @param string $to_encoding
-     * @param string $from_encoding
+     * @param string|null $to_encoding
+     * @param string|null $from_encoding
      *
      * @return string
      */
-    public static function convertEncoding( $str, $to_encoding = NULL, $from_encoding = NULL )
+    public static function convertEncoding(string $str, string $to_encoding = null, string $from_encoding = null ): string
     {
         if ( is_string($str) && $to_encoding ){
             // エンコードあり
@@ -748,20 +732,17 @@ final class Util
      *  convert encoding recursively
      *
      * @param mixed $var
-     * @param string $to_encoding
-     * @param string $from_encoding
+     * @param string|null $to_encoding
+     * @param string|null $from_encoding
      *
      * @return mixed
      */
-    public static function convertEncodingRecursive( $var, $to_encoding = NULL, $from_encoding = NULL )
+    public static function convertEncodingRecursive($var, string $to_encoding = null, string $from_encoding = null)
     {
         $type = gettype($var);
         switch( $type ){
         case 'string':
-            {
-                return mb_convert_encoding($var,$to_encoding, $from_encoding);
-            }
-            break;
+            return mb_convert_encoding($var,$to_encoding, $from_encoding);
         case 'integer':
         case 'double':
         case 'boolean':
@@ -769,35 +750,28 @@ final class Util
         case 'unknown type':
             break;
         case 'array':
-            {
-                $newArray = array();
+            $newArray = array();
+            foreach( $var as $key => $value ){
+                $value = self::convertEncodingRecursive( $value, $to_encoding, $from_encoding );
+                $newArray[ $key ] = $value;
+            }
+            return $newArray;
+        case 'object':
+            $newObject = clone $var;
+            if ( $var instanceof Traversable ){
                 foreach( $var as $key => $value ){
                     $value = self::convertEncodingRecursive( $value, $to_encoding, $from_encoding );
-                    $newArray[ $key ] = $value;
-                }
-                return $newArray;
-            }
-            break;
-        case 'object':
-            {
-                $newObject = clone $var;
-                if ( $var instanceof Traversable ){
-                    foreach( $var as $key => $value ){
-                        $value = self::convertEncodingRecursive( $value, $to_encoding, $from_encoding );
-                        $newObject->$key = $value;
-                    }
-                    return $newObject;
-                }
-                else{
-                    $obj_vars = get_object_vars( $var );
-                    foreach( $obj_vars as $key => $value ){
-                        $value = self::convertEncodingRecursive( $value, $to_encoding, $from_encoding );
-                        $newObject->$key = $value;
-                    }
-                    return $newObject;
+                    $newObject->$key = $value;
                 }
             }
-            break;
+            else{
+                $obj_vars = get_object_vars( $var );
+                foreach( $obj_vars as $key => $value ){
+                    $value = self::convertEncodingRecursive( $value, $to_encoding, $from_encoding );
+                    $newObject->$key = $value;
+                }
+            }
+            return $newObject;
         }
 
         return $var;

@@ -14,7 +14,8 @@ class PostMacroHandler implements MacroHandlerInterface
      *
      * @return string|NULL
      */
-    public function process(string $keyword){
-        return $_POST[$keyword] ?? false;
+    public function process(string $keyword) : string
+    {
+        return $_POST[$keyword] ?? $keyword;
     }
 }

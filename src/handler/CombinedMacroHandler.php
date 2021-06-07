@@ -23,22 +23,16 @@ final class CombinedMacroHandler implements MacroHandlerInterface
     /**
      * {@inheritDoc}
      */
-    public function process(string $keyword)
+    public function process(string $keyword) : string
     {
         foreach($this->handlers as $handler){
             if (is_callable($handler)){
-                $res = $handler($keyword);
-                if ($res !== false){
-                    return $res;
-                }
+                $keyword = $handler($keyword);
             }
             else if ($handler instanceof MacroHandlerInterface){
-                $res = $handler->process($keyword);
-                if ($res !== false){
-                    return $res;
-                }
+                $keyword = $handler->process($keyword);
             }
         }
-        return false;
+        return $keyword;
     }
 }

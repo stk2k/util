@@ -14,7 +14,8 @@ class SessionMacroHandler implements MacroHandlerInterface
      *
      * @return string|NULL
      */
-    public function process(string $keyword){
-        return $_SESSION[$keyword] ?? false;
+    public function process(string $keyword) : string
+    {
+        return $_SESSION[$keyword] ?? $keyword;
     }
 }

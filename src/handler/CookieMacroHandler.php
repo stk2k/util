@@ -23,9 +23,10 @@ class CookieMacroHandler implements MacroHandlerInterface
      *
      * @param string $keyword
      *
-     * @return string|NULL
+     * @return string
      */
-    public function process(string $keyword){
-        return $this->keys[$keyword] ?? null;
+    public function process(string $keyword) : string
+    {
+        return $this->keys[$keyword] ?? $keyword;
     }
 }

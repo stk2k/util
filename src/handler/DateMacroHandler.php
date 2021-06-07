@@ -14,7 +14,8 @@ class DateMacroHandler implements MacroHandlerInterface
      *
      * @return string|NULL
      */
-    public function process(string $keyword){
+    public function process(string $keyword) : string
+    {
         switch($keyword){
             case 'DATE_NOW':
                 return strval(time());
@@ -49,6 +50,6 @@ class DateMacroHandler implements MacroHandlerInterface
                 $t = microtime(true);
                 return sprintf("%06d",($t - floor($t)) * 1000000);
         }
-        return false;
+        return $keyword;
     }
 }

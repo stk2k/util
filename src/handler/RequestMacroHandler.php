@@ -14,7 +14,8 @@ class RequestMacroHandler implements MacroHandlerInterface
      *
      * @return string|NULL
      */
-    public function process(string $keyword){
-        return $_REQUEST[$keyword] ?? false;
+    public function process(string $keyword) : string
+    {
+        return $_REQUEST[$keyword] ?? $keyword;
     }
 }

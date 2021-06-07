@@ -12,15 +12,16 @@ class SystemMacroHandler implements MacroHandlerInterface
      *
      * @param string $keyword
      *
-     * @return string|NULL
+     * @return string
      */
-    public function process(string $keyword){
+    public function process(string $keyword) : string
+    {
         switch($keyword){
             case 'SYS_TEMP_DIR':
                 return sys_get_temp_dir();
             case 'PHP_VERSION':
                 return phpversion();
         }
-        return false;
+        return $keyword;
     }
 }

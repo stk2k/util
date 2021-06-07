@@ -14,7 +14,8 @@ class GetMacroHandler implements MacroHandlerInterface
      *
      * @return string|NULL
      */
-    public function process(string $keyword){
-        return $_GET[$keyword] ?? false;
+    public function process(string $keyword) : string
+    {
+        return $_GET[$keyword] ?? $keyword;
     }
 }

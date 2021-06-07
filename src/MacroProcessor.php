@@ -120,16 +120,16 @@ class MacroProcessor
     
         return $this;
     }
-    
+
     /**
      * Expand string by macro keyword
      *
      * @param string $str
-     * @param callable $handler
+     * @param callable|null $handler
      *
      * @return string
      *
-     * @throws
+     * @throws MacroHandlerException
      */
     public function process(string $str, callable $handler = null) : string
     {
@@ -168,7 +168,7 @@ class MacroProcessor
                 throw new MacroHandlerException('Macro handlers returned resource result at keyword: ' . $keyword);
             }
 
-            $replace_map["%{$keyword}%"] = $replace;
+            $replace_map["%$keyword%"] = $replace;
         }
 
         return strtr($str, $replace_map);
@@ -181,7 +181,7 @@ class MacroProcessor
      *
      * @return array
      */
-    private static function findMacroKeywords(string $string)
+    private static function findMacroKeywords(string $string): array
     {
         if (preg_match_all('/%([0-9a-zA-Z].*?)%/',$string,$matches)) {
             if (is_array($matches)) {
@@ -202,7 +202,6 @@ class MacroProcessor
     {
         if ($this->handlers)
         {
-            $stack = null;
             foreach($this->handlers as $handler){
                 $replace = $handler($keyword);
                 if ($replace !== false){
